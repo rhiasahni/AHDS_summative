@@ -1,0 +1,15 @@
+---
+title: "AHDS2"
+output: html_document
+---
+
+```{r}
+#computational env 
+details::details(sessioninfo::session_info(),
+                 summary = "R and package versions")
+```
+```{r}
+#checking number of rows 
+nrow(BPX_D)
+```
+
