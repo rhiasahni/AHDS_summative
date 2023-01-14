@@ -13,3 +13,23 @@ details::details(sessioninfo::session_info(),
 nrow(BPX_D)
 ```
 
+#chekcing if this works in github
+```{r}
+#checking column 
+NCOL(BPX_D)
+```
+#why is it not workinggggg? 
+```{r}
+#test 
+head(BPX_D)
+```
+
+
+
+
+
+
+
+
+
+
