@@ -3,9 +3,85 @@ title: "Blood Pressure"
 output: html_document
 ---
 
+Loading library 
+```{r}
+library(ggplot2)
+library(hrbrthemes)
+library(dplyr)
+library(tidyr)
+library(viridis)
+```
+
+
+
 Computational Environment 
 ```{r}
 details::details(sessioninfo::session_info(),
                  summary = "R and package versions")
 ```
+
+
+Cleaning data 
+```{r}
+new_BP = BPX_D[, -c(3,4,5,7,8,10,11,12,13,14,15,16,19,22,25,26,27,28)]
+newBP <-  subset(new_BP , PEASCST1==1)
+complete_BP=na.omit(newBP)
+complete_BP[,-c(2)]
+final_BP= complete_BP[,-c(2)]%>%remove_rownames %>% column_to_rownames(var="SEQN")
+final_BP
+```
+
+Saving clean file
+```{r}
+save(final_BP, file = "file_BP.RData")
+```
+
+```{r}
+final_BP
+```
+
+
+#checking outliers for systolic BP
+```{r}
+boxplot(final_BP$BPXSY1, final_BP$BPXSY2, final_BP$BPXSY3)
+```
+
+#checking outliers for Diastolic BP
+```{r}
+boxplot(final_BP$BPXDI1, final_BP$BPXDI2, final_BP$BPXDI3)
+```
+
+Removing rows with Systolic pr diastolic BP =0 
+```{r}
+p2 <- ggplot(data=final_BP, aes(x=BPXDI1, group=BPQ150A, fill=BPQ150A)) +
+    geom_density(adjust=1.5, alpha=.4) +
+    theme_ipsum()
+p2
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
